@@ -101,7 +101,11 @@
       "adjacentMean": 1.5463954004748115,
       "seamDifference": 1.3873062133789062,
       "maxAdjacent": 1.8424873352050781
-    }
+    },
+    "runtimeFile": "sleep-rig-v3.webp",
+    "runtimeSha256": "080aa0f35c94d7d585c717ba02a6c4400f4569797589ec627e14f4ee20a2ed7b",
+    "runtimeBytes": 848348,
+    "runtimeEncoding": "lossless-webp"
   },
   "happy": {
     "frames": 30,
@@ -133,7 +137,11 @@
       "adjacentMean": 1.2854960211392106,
       "seamDifference": 0.2587242126464844,
       "maxAdjacent": 1.7310371398925781
-    }
+    },
+    "runtimeFile": "happy-rig-v1.webp",
+    "runtimeSha256": "383ee8da566d07db079359bbf446208ebe24d9b8c723bc282765e339201b5d80",
+    "runtimeBytes": 823420,
+    "runtimeEncoding": "lossless-webp"
   },
   "celebrate": {
     "frames": 30,
@@ -193,7 +201,11 @@
       "adjacentMean": 5.459100525954674,
       "seamDifference": 15.335514068603516,
       "maxAdjacent": 8.892169952392578
-    }
+    },
+    "runtimeFile": "takeoff-rig-v2.webp",
+    "runtimeSha256": "6875933c06717504501ebc6e7bade4ca7f83fa99a588be58ccf63e784f0c1d8a",
+    "runtimeBytes": 486782,
+    "runtimeEncoding": "lossless-webp"
   },
   "hover": {
     "frames": 30,
@@ -225,7 +237,11 @@
       "adjacentMean": 7.982404643091662,
       "seamDifference": 8.196971893310547,
       "maxAdjacent": 9.951801300048828
-    }
+    },
+    "runtimeFile": "hover-rig-v2.webp",
+    "runtimeSha256": "378c0b0692a5160b55c9a40b40a2c495b0f2acac38094e06e7bb52f928760767",
+    "runtimeBytes": 565888,
+    "runtimeEncoding": "lossless-webp"
   },
   "descend": {
     "fps": 24,
