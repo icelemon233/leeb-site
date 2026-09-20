@@ -71,20 +71,6 @@
     "bytes": 357924,
     "renderer": "fixed-layer-rig"
   },
-  "rest": {
-    "frames": 30,
-    "uniqueFrames": 30,
-    "fps": 24,
-    "columns": 6,
-    "rows": 5,
-    "cell": 256,
-    "alpha": true,
-    "sourceCharacters": 30,
-    "interpolation": null,
-    "sha256": "bb2d526b31ffcf0345d2605910efb810693fa0526def34b59f85ef0bafdce52a",
-    "bytes": 427400,
-    "renderer": "atlas"
-  },
   "sleep": {
     "frames": 30,
     "uniqueFrames": 30,
@@ -93,25 +79,29 @@
     "rows": 5,
     "cell": 256,
     "alpha": true,
-    "sourceCharacters": 30,
-    "interpolation": null,
-    "sha256": "b105e4d7128f31dd70cbb2685c3033fd54430057731360fea1e1b85983fc23e3",
-    "bytes": 263212,
-    "renderer": "atlas"
-  },
-  "wake": {
-    "frames": 30,
-    "uniqueFrames": 30,
-    "fps": 24,
-    "columns": 6,
-    "rows": 5,
-    "cell": 256,
-    "alpha": true,
-    "sourceCharacters": 30,
-    "interpolation": null,
-    "sha256": "3e4c4c6abe1e06971b478e5c9cd2d8b3dd3ad3c1fb88f172b85136f7430cc8f6",
-    "bytes": 286848,
-    "renderer": "atlas"
+    "renderer": "baked-fixed-layer-rig",
+    "file": "sleep-rig-v3.png",
+    "frameDirectory": "frames/sleep-rig-v3",
+    "sha256": "008ad769b1c9dfa444739df712ee20e15224d2ce9b406a5548a27daa42dee205",
+    "sourceLayers": [
+      "foot-back",
+      "foot-front",
+      "arm-back",
+      "body",
+      "eyes",
+      "arm",
+      "leaves",
+      "leaf-left",
+      "leaf-right",
+      "flight-left",
+      "flight-right"
+    ],
+    "continuity": {
+      "uniqueFrames": 30,
+      "adjacentMean": 1.5463954004748115,
+      "seamDifference": 1.3873062133789062,
+      "maxAdjacent": 1.8424873352050781
+    }
   },
   "happy": {
     "frames": 30,
@@ -121,11 +111,29 @@
     "rows": 5,
     "cell": 256,
     "alpha": true,
-    "sourceCharacters": 30,
-    "interpolation": null,
-    "sha256": "16455355c3e284171f15f1f98f8f8d354ed034f70f209596618d986ea2a6052e",
-    "bytes": 352682,
-    "renderer": "atlas"
+    "renderer": "baked-fixed-layer-rig",
+    "file": "happy-rig-v1.png",
+    "frameDirectory": "frames/happy-rig-v1",
+    "sha256": "1d1cd0f7db5fe2793a05325d9207c3a199da9f0038dafa0abbfbb204a28616fa",
+    "sourceLayers": [
+      "foot-back",
+      "foot-front",
+      "arm-back",
+      "body",
+      "eyes",
+      "arm",
+      "leaves",
+      "leaf-left",
+      "leaf-right",
+      "flight-left",
+      "flight-right"
+    ],
+    "continuity": {
+      "uniqueFrames": 30,
+      "adjacentMean": 1.2854960211392106,
+      "seamDifference": 0.2587242126464844,
+      "maxAdjacent": 1.7310371398925781
+    }
   },
   "celebrate": {
     "frames": 30,
@@ -154,5 +162,89 @@
     "sha256": "19b4e6d18ead0e4f531c13813a4a757daec72e48cfe46cbd0c23174f003b8886",
     "bytes": 459880,
     "renderer": "atlas"
+  },
+  "takeoff": {
+    "frames": 30,
+    "uniqueFrames": 30,
+    "fps": 24,
+    "columns": 6,
+    "rows": 5,
+    "cell": 256,
+    "alpha": true,
+    "renderer": "baked-fixed-layer-rig",
+    "file": "takeoff-rig-v2.png",
+    "frameDirectory": "frames/takeoff-rig-v2",
+    "sha256": "c0f5a95bef8b4bc7d0ccd8a8cde1d5fa350c88b670f055a81f24a2c898cde460",
+    "sourceLayers": [
+      "foot-back",
+      "foot-front",
+      "arm-back",
+      "body",
+      "eyes",
+      "arm",
+      "leaves",
+      "leaf-left",
+      "leaf-right",
+      "flight-left",
+      "flight-right"
+    ],
+    "continuity": {
+      "uniqueFrames": 30,
+      "adjacentMean": 5.459100525954674,
+      "seamDifference": 15.335514068603516,
+      "maxAdjacent": 8.892169952392578
+    }
+  },
+  "hover": {
+    "frames": 30,
+    "uniqueFrames": 30,
+    "fps": 24,
+    "columns": 6,
+    "rows": 5,
+    "cell": 256,
+    "alpha": true,
+    "renderer": "baked-fixed-layer-rig",
+    "file": "hover-rig-v2.png",
+    "frameDirectory": "frames/hover-rig-v2",
+    "sha256": "6d71f8f7b089d28b0db35f5d99532e4a42368f3fa18552dfadada9a1ce1f23d2",
+    "sourceLayers": [
+      "foot-back",
+      "foot-front",
+      "arm-back",
+      "body",
+      "eyes",
+      "arm",
+      "leaves",
+      "leaf-left",
+      "leaf-right",
+      "flight-left",
+      "flight-right"
+    ],
+    "continuity": {
+      "uniqueFrames": 30,
+      "adjacentMean": 7.982404643091662,
+      "seamDifference": 8.196971893310547,
+      "maxAdjacent": 9.951801300048828
+    }
+  },
+  "descend": {
+    "fps": 24,
+    "renderer": "runtime-fixed-layer-rig",
+    "sourceLayers": [
+      "foot-back",
+      "foot-front",
+      "arm-back",
+      "body",
+      "eyes",
+      "arm",
+      "leaves",
+      "leaf-left",
+      "leaf-right",
+      "flight-left",
+      "flight-right"
+    ],
+    "flightDurationMs": 1250,
+    "settleDurationMs": 800,
+    "transition": "from-current-flight-pose"
   }
 }
