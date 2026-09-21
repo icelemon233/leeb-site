@@ -1,4 +1,10 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#f6f5ef"/><meta name="description" content="Leeb，把好好吃饭和动一动，变成与小豆芽一起成长的日常。"/><link rel="preload" as="image" href="./assets/pet/initial-poster.webp" fetchpriority="high"/><link rel="preload" as="image" href="./assets/pet/initial-rig.webp" fetchpriority="high"/><title>Leeb · 一起好好生活</title>  <script type="module" crossorigin src="./assets/index-IclDAAyE.js"></script>
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#f6f5ef"/><meta name="description" content="Leeb，把好好吃饭和动一动，变成与小豆芽一起成长的日常。"/><link rel="preload" as="image" href="./assets/pet/initial-poster.webp" fetchpriority="high"/><link rel="preload" as="image" href="./assets/pet/initial-rig.webp" fetchpriority="high"/><title>Leeb · 一起好好生活</title>  <script type="module" crossorigin src="./assets/index-dECyhkUB.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/supabase-D_iOwayF.js">
   <link rel="stylesheet" crossorigin href="./assets/index-daKR2cTg.css">
-</head><body><div id="root"><img src="./assets/pet/initial-poster.webp" alt="豆豆正在打开 Leeb" fetchpriority="high" width="136" height="136" style="position:fixed;left:8%;bottom:100px;width:136px;height:136px"/></div></body></html>
+</head><body><script>
+// Pick one spawn before the first paint; React and both loading stages reuse it.
+const spawnX = 8 + Math.random() * Math.max(0, innerWidth - 152);
+const spawnY = Math.max(64, innerHeight - 236);
+document.documentElement.style.setProperty('--pet-spawn-x', spawnX + 'px');
+document.documentElement.style.setProperty('--pet-spawn-y', spawnY + 'px');
+</script><div id="root"><img src="./assets/pet/initial-poster.webp" alt="豆豆正在打开 Leeb" fetchpriority="high" width="136" height="136" style="position:fixed;left:var(--pet-spawn-x,8px);top:var(--pet-spawn-y,64px);width:136px;height:136px"/></div></body></html>
