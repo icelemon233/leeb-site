@@ -1,4 +1,4 @@
-const MANIFEST={"version":"37eb4b9270bc221dea76","core":["index.html","assets/index-BiVo35wk.css","assets/index-DReBAAi-.js","assets/supabase-D_iOwayF.js"],"media":["assets/pet/initial-poster.webp","assets/pet/initial-rig.webp","assets/pet/happy-rig-v1.webp","assets/pet/sleep-rig-v3.webp","assets/pet/takeoff-rig-v2.webp","assets/pet/hover-rig-v2.webp","assets/expedition/meadow.webp","assets/expedition/forest.webp","assets/expedition/lake.webp","assets/expedition/pressed-flower.webp","assets/expedition/amber-cone.webp","assets/expedition/lake-pebble.webp","assets/editorial/bag-cutout.webp","assets/editorial/bag.webp","assets/editorial/bottle.webp","assets/editorial/cover.webp","assets/editorial/dairy.webp","assets/editorial/empty.webp","assets/editorial/forest.webp","assets/editorial/fruit.webp","assets/editorial/garden.webp","assets/editorial/grain.webp","assets/editorial/hat-cutout.webp","assets/editorial/hat.webp","assets/editorial/kindness.webp","assets/editorial/lake.webp","assets/editorial/meadow.webp","assets/editorial/nuts.webp","assets/editorial/protein.webp","assets/editorial/room.webp","assets/editorial/scarf-cutout.webp","assets/editorial/scarf.webp","assets/editorial/vegetable.webp"]};
+const MANIFEST={"version":"e570eef32f380a4463a4","core":["index.html","assets/index-BiVo35wk.css","assets/index-DReBAAi-.js","assets/supabase-D_iOwayF.js"],"media":["assets/pet/initial-poster.webp","assets/pet/initial-rig.webp","assets/pet/happy-rig-v1.webp","assets/pet/sleep-rig-v3.webp","assets/pet/takeoff-rig-v2.webp","assets/pet/hover-rig-v2.webp","assets/expedition/meadow.webp","assets/expedition/forest.webp","assets/expedition/lake.webp","assets/expedition/pressed-flower.webp","assets/expedition/amber-cone.webp","assets/expedition/lake-pebble.webp","assets/editorial/bag-cutout.webp","assets/editorial/bag.webp","assets/editorial/bottle.webp","assets/editorial/cover.webp","assets/editorial/dairy.webp","assets/editorial/empty.webp","assets/editorial/forest.webp","assets/editorial/fruit.webp","assets/editorial/garden.webp","assets/editorial/grain.webp","assets/editorial/hat-cutout.webp","assets/editorial/hat.webp","assets/editorial/kindness.webp","assets/editorial/lake.webp","assets/editorial/meadow.webp","assets/editorial/nuts.webp","assets/editorial/protein.webp","assets/editorial/room.webp","assets/editorial/scarf-cutout.webp","assets/editorial/scarf.webp","assets/editorial/vegetable.webp"]};
 /* MANIFEST is injected by build-offline.mjs. Never cache API/auth responses. */
 const PREFIX='leeb-static-';
 const CACHE=PREFIX+MANIFEST.version;
@@ -36,7 +36,8 @@ self.addEventListener('fetch',event=>{
  event.respondWith((async()=>{
   const cache=await caches.open(CACHE),key=navigation?url('index.html'):target.href;
   const saved=await cache.match(key);if(saved)return saved;
-  const response=await fetch(request);
+  // Do not reuse the intercepted image request and its HTTP cache transaction.
+  const response=await fetch(new Request(key,{cache:"no-store"}));
   if(response.ok&&!navigation)event.waitUntil(cache.put(key,response.clone()).catch(()=>{}));
   return response;
  })());
