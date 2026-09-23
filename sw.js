@@ -1,16 +1,41 @@
-const MANIFEST={"version":"b56fe5c8aa10b2e916a2","core":["index.html","assets/index-7vLjDo_S.css","assets/index-CllD20cR.js","assets/supabase-D_iOwayF.js"],"media":["assets/pet/initial-poster.webp","assets/pet/initial-rig.webp","assets/pet/happy-rig-v1.webp","assets/pet/sleep-rig-v3.webp","assets/pet/takeoff-rig-v2.webp","assets/pet/hover-rig-v2.webp","assets/expedition/meadow.webp","assets/expedition/forest.webp","assets/expedition/lake.webp","assets/expedition/pressed-flower.webp","assets/expedition/amber-cone.webp","assets/expedition/lake-pebble.webp","assets/editorial/bag-cutout.webp","assets/editorial/bag.webp","assets/editorial/bottle.webp","assets/editorial/cover.webp","assets/editorial/dairy.webp","assets/editorial/empty.webp","assets/editorial/forest.webp","assets/editorial/fruit.webp","assets/editorial/garden.webp","assets/editorial/grain.webp","assets/editorial/hat-cutout.webp","assets/editorial/hat.webp","assets/editorial/kindness.webp","assets/editorial/lake.webp","assets/editorial/meadow.webp","assets/editorial/nuts.webp","assets/editorial/protein.webp","assets/editorial/room.webp","assets/editorial/scarf-cutout.webp","assets/editorial/scarf.webp","assets/editorial/vegetable.webp"]};
+const MANIFEST={"version":"ade8d27bf27128c7108e","core":["index.html","assets/index-7vLjDo_S.css","assets/index-CllD20cR.js","assets/supabase-D_iOwayF.js"],"media":["assets/pet/initial-poster.webp","assets/pet/initial-rig.webp","assets/pet/happy-rig-v1.webp","assets/pet/sleep-rig-v3.webp","assets/pet/takeoff-rig-v2.webp","assets/pet/hover-rig-v2.webp","assets/expedition/meadow.webp","assets/expedition/forest.webp","assets/expedition/lake.webp","assets/expedition/pressed-flower.webp","assets/expedition/amber-cone.webp","assets/expedition/lake-pebble.webp","assets/editorial/bag-cutout.webp","assets/editorial/bag.webp","assets/editorial/bottle.webp","assets/editorial/cover.webp","assets/editorial/dairy.webp","assets/editorial/empty.webp","assets/editorial/forest.webp","assets/editorial/fruit.webp","assets/editorial/garden.webp","assets/editorial/grain.webp","assets/editorial/hat-cutout.webp","assets/editorial/hat.webp","assets/editorial/kindness.webp","assets/editorial/lake.webp","assets/editorial/meadow.webp","assets/editorial/nuts.webp","assets/editorial/protein.webp","assets/editorial/room.webp","assets/editorial/scarf-cutout.webp","assets/editorial/scarf.webp","assets/editorial/vegetable.webp"]};
 /* MANIFEST is injected by build-offline.mjs. Never cache API/auth responses. */
 const PREFIX='leeb-static-';
 const CACHE=PREFIX+MANIFEST.version;
 const base=self.registration.scope;
 const url=path=>new URL(path,base).href;
 const allowed=new Set([...MANIFEST.core,...MANIFEST.media].map(url));
+const pending=new Map();
+// Bound both headers AND body; headers alone do not mean the image arrived.
+async function download(key){
+ if(!pending.has(key))pending.set(key,(async()=>{
+  for(let attempt=0;attempt<2;attempt++){
+   const controller=new AbortController();
+   let timer;
+   try{
+    const target=new URL(key);
+    if(attempt)target.searchParams.set('leeb-retry',MANIFEST.version+'-'+Date.now());
+    const response=await Promise.race([
+     (async()=>{
+      const r=await fetch(new Request(target.href,{cache:'no-store',signal:controller.signal}));
+      if(!r.ok)throw new Error('Offline resource HTTP '+r.status);
+      const body=await r.arrayBuffer();
+      if(!body.byteLength)throw new Error('Empty static resource');
+      return new Response(body,{status:r.status,headers:r.headers});
+     })(),
+     new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(new Error('Static download timed out'));},12000);})
+    ]);
+    return response;
+   }catch(error){if(attempt===1)throw error;}
+   finally{clearTimeout(timer);}
+  }
+ })().finally(()=>pending.delete(key)));
+ return (await pending.get(key)).clone();
+}
 async function store(path){
  const cache=await caches.open(CACHE),key=url(path);
  if(await cache.match(key))return;
- const response=await fetch(new Request(key,{cache:'reload',signal:AbortSignal.timeout(30000)}));
- if(!response.ok)throw new Error('Offline resource unavailable');
- await cache.put(key,response);
+ await cache.put(key,await download(key));
 }
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{for(const path of MANIFEST.core)await store(path)})());
@@ -37,7 +62,7 @@ self.addEventListener('fetch',event=>{
   const cache=await caches.open(CACHE),key=navigation?url('index.html'):target.href;
   const saved=await cache.match(key);if(saved)return saved;
   // Do not reuse the intercepted image request and its HTTP cache transaction.
-  const response=await fetch(new Request(key,{cache:"no-store"}));
+  const response=await download(key);
   if(response.ok&&!navigation)event.waitUntil(cache.put(key,response.clone()).catch(()=>{}));
   return response;
  })());
